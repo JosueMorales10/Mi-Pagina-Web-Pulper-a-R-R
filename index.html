@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulpería RyR – Catálogo</title>
+<meta name="description" content="Catálogo de Pulpería RyR con menú lateral, búsqueda y tarjetas con precios.">
+<style>
+  :root{
+    --pri:#156641; --pri2:#0f4c2a; --bg:#f5f9f5; --card:#fff;
+    --ink:#1f2a22; --mut:#6c7a71; --bd:#e2efe4; --chip:#edf7ef;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Arial,sans-serif}
+  header{position:sticky;top:0;z-index:30;background:linear-gradient(90deg,var(--pri),var(--pri2));color:#fff}
+  .wrap{max-width:1200px;margin:0 auto;padding:14px 16px}
+  .topbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .brand{font-weight:800}
+  .topbar input,.topbar select{border:1px solid #ffffff44;background:#ffffff14;color:#fff;padding:10px 12px;border-radius:10px;outline:none}
+  .topbar input::placeholder{color:#eef6efcc}
+  .container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:260px 1fr;gap:20px;padding:20px}
+  aside{position:sticky;top:88px;height:fit-content;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px}
+  aside h3{margin:4px 0 8px;color:var(--pri2);font-size:15px}
+  .catlist{list-style:none;margin:0;padding:0}
+  .catlist li{margin:2px 0}
+  .cat{all:unset;display:block;width:100%;padding:10px 12px;border-radius:10px;cursor:pointer;color:var(--pri2);border:1px solid transparent}
+  .cat:hover{background:#f0fbf2}
+  .cat.active{background:#e9f6ec;border-color:#d5ecdb;font-weight:600}
+  .banner{background:#fff;border:1px dashed #cfe5d2;border-radius:12px;padding:12px 14px;margin:6px 0 16px;color:var(--pri2)}
+  .meta-row{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0;color:var(--mut);font-size:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--bd);border-radius:16px;overflow:hidden;transition:.15s transform}
+  .card:hover{transform:translateY(-3px)}
+  .thumb{width:100%;height:165px;background:#eef6ef;display:flex;align-items:center;justify-content:center;position:relative}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .thumb.noimg::after{content:"Agrega tu imagen (img/archivo.jpg)";position:absolute;color:#156641;font-size:14px}
+  .pad{padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+  .badge{font-size:12px;background:var(--chip);color:var(--pri2);padding:4px 8px;border-radius:40px;width:max-content}
+  .price{font-weight:800}
+  .feat{font-size:13.5px;color:var(--mut)}
+  .props{font-size:12.5px;color:var(--mut)}
+  footer{margin:26px 0 10px;text-align:center;color:var(--mut)}
+  @media (max-width:880px){ .container{grid-template-columns:1fr} aside{position:static} }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">🛒 Pulpería RyR — Goascorán, Valle</div>
+
+      <input id="q" type="search" placeholder="Buscar productos (ej. queso, jabón, pollo) …" aria-label="Buscar productos">
+
+      <select id="sort" aria-label="Ordenar">
+        <option value="pop">Ordenar: popularidad</option>
+        <option value="price-asc">Precio: menor a mayor</option>
+        <option value="price-desc">Precio: mayor a menor</option>
+        <option value="name-asc">Nombre: A–Z</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <aside>
+    <h3>Categorías</h3>
+    <ul class="catlist" id="catlist">
+      <li><button class="cat active" data-cat="Todos">Todos</button></li>
+      <li><button class="cat active" data-cat="Churros y Galletas">Churros y Galletas</button></li>
+      <li><button class="cat" data-cat="Lácteos">Lácteos</button></li>
+      <li><button class="cat" data-cat="Reposteria">Reposteria</button></li>
+      <li><button class="cat" data-cat="Carnes">Carnes</button></li>
+      <li><button class="cat" data-cat="Refrescos">Refrescos</button></li>
+      <li><button class="cat" data-cat="Frutas y Verduras">Frutas y Verduras</button></li>
+      <li><button class="cat" data-cat="Limpieza">Limpieza</button></li>
+      <li><button class="cat" data-cat="Cocina">Cocina</button></li>
+    </ul>
+
+    <h3 style="margin-top:24px">Pulperia R/R</h3>
+    <p style="font-size:13px;color:var(--mut);line-height:1.45">
+     La Pulpería R/R pertenece al rubro de comercio minorista, dedicada a la venta de productos de consumo diario como alimentos, bebidas, artículos de limpieza, productos lácteos, carnes, abarrotes, verduras frescas y artículos de cocina.
+Su principal objetivo es satisfacer las necesidades básicas de la comunidad de manera accesible, rápida y con atención personalizada. <b>/</b><code>/</code><br>
+      
+    </p>
+  </aside>
+
+  <main>
+    <div class="banner">
+      <strong>Ubicación:</strong> Barrio El Centro, frente a la cancha de fútbol, Goascorán, Valle. ·
+      <strong>Servicios:</strong> Atención rápida y personalizada, venta al detalle y por volumen y promociones semanales en productos frescos. ·
+      <strong>Horario:</strong> L–D 7:00 a. m. – 8:00 p. m. ·
+      <strong>Días fuerte:</strong> Martes y Sábado (verduras); Lunes (lácteos/carnes)
+    </div>
+
+    <div class="meta-row">
+      <div>Mostrando: <span id="count">0</span> productos</div>
+      <div>Filtro activo: <span id="filterLabel">Todos</span></div>
+    </div>
+
+    <section class="grid" id="grid" aria-live="polite">
+
+      <!-- Tarjetas HARDCODEADAS para que SIEMPRE se vean (aunque JS falle) -->
+      <!-- Usa data-* para buscar/ordenar sin depender de JSON -->
+      <!-- LÁCTEOS -->
+      <article class="card" data-name="Queso fresco" data-cat="Lácteos" data-price="45">
+        <div class="thumb"><img src="Img/Queso.jpg" alt="Queso fresco" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Lácteos</span>
+          <strong>Queso fresco</strong>
+          <span class="price">L 45</span>
+          <div class="feat">Queso artesanal, ideal para pupusas y baleadas.</div>
+          <div class="props">Clasificación: <b>Lácteos</b></div>
+        </div>
+      </article>
+
+<article class="card" data-name="Yogurt natural 1L" data-cat="Lácteos" data-price="75">
+  <div class="thumb">
+    <img src="Img/yogur.WEBP" alt="Yogurt natural 1L"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Lácteos</span>
+    <strong>Yogurt natural 1L</strong>
+    <span class="price">L 75</span>
+    <div class="feat">Yogur fresco y cremoso, fuente natural de calcio y probióticos.</div>
+    <div class="props">Clasificación: <b>Lácteos</b> | Presentación: Botella de 1 litro</div>
+  </div>
+</article>
+
+      <article class="card" data-name="Mantequilla" data-cat="Lácteos" data-price="30">
+        <div class="thumb"><img src="Img/Man.jpg" alt="Mantequilla" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Lácteos</span>
+          <strong>Mantequilla</strong>
+          <span class="price">L 30</span>
+          <div class="feat">Suave y cremosa, ideal para cocinar y untar.</div>
+          <div class="props">Clasificación: <b>Lácteos</b></div>
+        </div>
+      </article>
+
+      <article class="card" data-name="Leche entera 1L" data-cat="Lácteos" data-price="25">
+        <div class="thumb"><img src="Img/LecheEntera.WEBP" alt="Leche entera 1L" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Lácteos</span>
+          <strong>Leche entera 1L</strong>
+          <span class="price">L 25</span>
+          <div class="feat">Pasteurizada, lista para consumo.</div>
+          <div class="props">Clasificación: <b>Lácteos</b></div>
+        </div>
+      </article>
+
+      <!-- CARNES -->
+      <article class="card" data-name="Pollo por libra" data-cat="Carnes" data-price="60">
+        <div class="thumb"><img src="Img/Pollo.WEBP" alt="Pollo por libra" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Carnes</span>
+          <strong>Pollo por libra</strong>
+          <span class="price">L 60</span>
+          <div class="feat">Cortes frescos del día.</div>
+          <div class="props">Clasificación: <b>Carnes</b></div>
+        </div>
+      </article>
+
+ <article class="card" data-name="Carne Molida (lb)" data-cat="Carnes" data-price="80">
+        <div class="thumb"><img src="Img/Molida.WEBP" alt="Carne Molida (lb)" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Carnes</span>
+          <strong>Carne Molida (lb)</strong>
+          <span class="price">L 80</span>
+          <div class="feat">Cortes frescos del día.</div>
+          <div class="props">Clasificación: <b>Carnes</b></div>
+        </div>
+      </article>
+
+      <article class="card" data-name="Chorizo criollo" data-cat="Carnes" data-price="40">
+        <div class="thumb"><img src="Img/Chori.WEBP" alt="Chorizo criollo" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Carnes</span>
+          <strong>Chorizo criollo</strong>
+          <span class="price">L 40</span>
+          <div class="feat">Sazonado, perfecto para asar.</div>
+          <div class="props">Clasificación: <b>Carnes</b></div>
+        </div>
+      </article>
+
+      <article class="card" data-name="Chuleta de cerdo" data-cat="Carnes" data-price="70">
+        <div class="thumb"><img src="Img/Chu.jpg" alt="Chuleta de cerdo" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Carnes</span>
+          <strong>Chuleta de cerdo</strong>
+          <span class="price">L 70</span>
+          <div class="feat">Corte magro, refrigerado.</div>
+          <div class="props">Clasificación: <b>Carnes</b></div>
+        </div>
+      </article>
+
+      <!-- REFRESCOS -->
+      <article class="card" data-name="Refresco cola 2L" data-cat="Refrescos" data-price="48">
+        <div class="thumb"><img src="Img/Coca.jpg" alt="Refresco cola 2L" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Refrescos</span>
+          <strong>Refresco cola 2L</strong>
+          <span class="price">L 48</span>
+          <div class="feat">Gaseosa clásica.</div>
+          <div class="props">Clasificación: <b>Refrescos</b></div>
+        </div>
+      </article>
+
+      <article class="card" data-name="Agua purificada 1L" data-cat="Refrescos" data-price="20">
+        <div class="thumb"><img src="Img/Agua.WEBP" alt="Agua purificada 1L" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Refrescos</span>
+          <strong>Agua purificada 1L</strong>
+          <span class="price">L 20</span>
+          <div class="feat">Sin gas.</div>
+          <div class="props">Clasificación: <b>Refrescos</b></div>
+        </div>
+      </article>
+
+      <article class="card" data-name="Jugo natural 1L" data-cat="Refrescos" data-price="45">
+        <div class="thumb"><img src="Img/Jugo.jpg" alt="Jugo natural 1L" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Refrescos</span>
+          <strong>Jugo natural 1L</strong>
+          <span class="price">L 45</span>
+          <div class="feat">Sabor naranja, sin colorantes.</div>
+          <div class="props">Clasificación: <b>Refrescos</b></div>
+        </div>
+      </article>
+
+      <!-- FRUTAS Y VERDURAS -->
+      <article class="card" data-name="Tomate (lb)" data-cat="Frutas y Verduras" data-price="24">
+        <div class="thumb"><img src="Img/Toma.jpg" alt="Tomate (lb)" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Frutas y Verduras</span>
+          <strong>Tomate (lb)</strong>
+          <span class="price">L 24</span>
+          <div class="feat">Rojo, fresco de la huerta.</div>
+          <div class="props">Clasificación: <b>Frutas y Verduras</b></div>
+        </div>
+      </article>
+
+ <article class="card" data-name="Limones (lb)" data-cat="Frutas y Verduras" data-price="15">
+        <div class="thumb"><img src="Img/Limon.jpg" alt="Limones (lb)" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Frutas y Verduras</span>
+          <strong>Limones (lb)</strong>
+          <span class="price">L 15</span>
+          <div class="feat">Verde, fresco de la huerta.</div>
+          <div class="props">Clasificación: <b>Frutas y Verduras</b></div>
+        </div>
+      </article>
+
+ <article class="card" data-name="Chiles (lb)" data-cat="Frutas y Verduras" data-price="19">
+        <div class="thumb"><img src="Img/Chiles.jpg" alt="Chiles (lb)" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Frutas y Verduras</span>
+          <strong>Chiles (lb)</strong>
+          <span class="price">L 19</span>
+          <div class="feat">Verdes y rojos, frescos de la huerta.</div>
+          <div class="props">Clasificación: <b>Frutas y Verduras</b></div>
+        </div>
+      </article>
+
+ <article class="card" data-name="Zanahoria" data-cat="Frutas y Verduras" data-price="14">
+        <div class="thumb"><img src="Img/Zana.jpg" alt="Zanahoria" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Frutas y Verduras</span>
+          <strong>Zanahoria</strong>
+          <span class="price">L 14</span>
+          <div class="feat">Frescas de la huerta.</div>
+          <div class="props">Clasificación: <b>Frutas y Verduras</b></div>
+        </div>
+      </article>
+
+<article class="card" data-name="Repollo Entero" data-cat="Frutas y Verduras" data-price="30">
+        <div class="thumb"><img src="Img/Repollo.WEBP" alt="Repollo Entero" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Frutas y Verduras</span>
+          <strong>Repollo Entero</strong>
+          <span class="price">L 30</span>
+          <div class="feat">Fresco del huerto.</div>
+          <div class="props">Clasificación: <b>Frutas y Verduras</b></div>
+        </div>
+      </article>
+
+      <article class="card" data-name="Cebolla (lb)" data-cat="Frutas y Verduras" data-price="22">
+        <div class="thumb"><img src="Img/Cebo.WEBP" alt="Cebolla (lb)" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Frutas y Verduras</span>
+          <strong>Cebolla (lb)</strong>
+          <span class="price">L 22</span>
+          <div class="feat">Cosecha local.</div>
+          <div class="props">Clasificación: <b>Frutas y Verduras</b></div>
+        </div>
+      </article>
+
+      <article class="card" data-name="Banano (mano)" data-cat="Frutas y Verduras" data-price="30">
+        <div class="thumb"><img src="Img/Bana.WEBP" alt="Banano (mano)" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Frutas y Verduras</span>
+          <strong>Banano (mano)</strong>
+          <span class="price">L 30</span>
+          <div class="feat">Dulce y nutritivo.</div>
+          <div class="props">Clasificación: <b>Frutas y Verduras</b></div>
+        </div>
+      </article>
+
+      <!-- LIMPIEZA -->
+      <article class="card" data-name="Detergente 1kg" data-cat="Limpieza" data-price="75">
+        <div class="thumb"><img src="Img/Deter.jpg" alt="Detergente 1kg" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Limpieza</span>
+          <strong>Detergente 1kg</strong>
+          <span class="price">L 75</span>
+          <div class="feat">Rinde y cuida los colores.</div>
+          <div class="props">Clasificación: <b>Limpieza</b></div>
+        </div>
+      </article>
+
+ <article class="card" data-name="Toallas de papel (2 rollos)" data-cat="Limpieza" data-price="45">
+  <div class="thumb">
+    <img src="Img/toallas.png" alt="Toallas de papel (2 rollos)"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Limpieza</span>
+    <strong>Toallas de papel (2 rollos)</strong>
+    <span class="price">L 45</span>
+    <div class="feat">Absorbentes y resistentes para cocina o limpieza general.</div>
+    <div class="props">Clasificación: <b>Limpieza</b> | Presentación: Paquete doble</div>
+  </div>
+</article>
+
+
+      <article class="card" data-name="Jabón de baño" data-cat="Limpieza" data-price="20">
+        <div class="thumb"><img src="Img/Jabon.jpg" alt="Jabón de baño" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Limpieza</span>
+          <strong>Jabón de baño</strong>
+          <span class="price">L 20</span>
+          <div class="feat">Aroma suave, varias fragancias.</div>
+          <div class="props">Clasificación: <b>Limpieza</b></div>
+        </div>
+      </article>
+
+      <article class="card" data-name="Cloro 1L" data-cat="Limpieza" data-price="30">
+        <div class="thumb"><img src="Img/Cloro.jpg" alt="Cloro 1L" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Limpieza</span>
+          <strong>Cloro 1L</strong>
+          <span class="price">L 30</span>
+          <div class="feat">Desinfección profunda.</div>
+          <div class="props">Clasificación: <b>Limpieza</b></div>
+        </div>
+      </article>
+
+<!-- ===== Reposteria ===== -->
+<article class="card" data-name="Pastel de vainilla" data-cat="Reposteria" data-price="220">
+  <div class="thumb">
+    <img src="Img/Pastel.jpg" alt="Pastel de vainilla"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Reposteria</span>
+    <strong>Pastel de vainilla</strong>
+    <span class="price">L 220</span>
+    <div class="feat">Esponjoso, relleno de crema y glaseado ligero.</div>
+    <div class="props">Porciones: 8–10 | Encargos: 24 h</div>
+  </div>
+</article>
+
+<article class="card" data-name="Pan de banano" data-cat="Reposteria" data-price="55">
+  <div class="thumb">
+    <img src="Img/PBana.WEBP" alt="Pan de banano"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Reposteria</span>
+    <strong>Pan de banano</strong>
+    <span class="price">L 55</span>
+    <div class="feat">Húmedo y aromático, con nuez opcional.</div>
+    <div class="props">Unidad: 1 molde pequeño</div>
+  </div>
+</article>
+<article class="card" data-name="Cupcakes surtidos (6)" data-cat="Reposteria" data-price="120">
+  <div class="thumb">
+    <img src="Img/CUT.WEBP" alt="Cupcakes surtidos"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Reposteria</span>
+    <strong>Cupcakes surtidos (6)</strong>
+    <span class="price">L 120</span>
+    <div class="feat">Vainilla, chocolate y fresa con betún.</div>
+    <div class="props">Paquete x6 | Personalizables</div>
+  </div>
+</article>
+
+<article class="card" data-name="Galletas de avena (12)" data-cat="Reposteria" data-price="95">
+  <div class="thumb">
+    <img src="Img/Avena.jpg" alt="Galletas de avena"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Reposteria</span>
+    <strong>Galletas de avena (12)</strong>
+    <span class="price">L 95</span>
+    <div class="feat">Crujientes por fuera, suaves por dentro.</div>
+    <div class="props">Paquete x12 | Con pasas o chispas</div>
+  </div>
+</article>
+
+
+      <!-- COCINA -->
+      <article class="card" data-name="Arroz 2 lb" data-cat="Cocina" data-price="56">
+        <div class="thumb"><img src="Img/Arroz.jpg" alt="Arroz 2 lb" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Cocina</span>
+          <strong>Arroz 2 lb</strong>
+          <span class="price">L 56</span>
+          <div class="feat">Grano selecto.</div>
+          <div class="props">Clasificación: <b>Cocina</b></div>
+        </div>
+      </article>
+
+<article class="card" data-name="Caja de huevos 30 unidades" data-cat="Cocina" data-price="130">
+  <div class="thumb">
+    <img src="Img/huevos.WEBP" alt="Caja de huevos 30 unidades"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Cocina</span>
+    <strong>Caja de huevos 30 unidades</strong>
+    <span class="price">L 130</span>
+    <div class="feat">Huevos frescos de granja, ideales para el hogar o negocio.</div>
+    <div class="props">Clasificación: <b>Cocina</b> | Presentación: Caja de 30 unidades</div>
+  </div>
+</article>
+
+      <article class="card" data-name="Frijol rojo 2 lb" data-cat="Cocina" data-price="70">
+        <div class="thumb"><img src="Img/Frijol.WEBP" alt="Frijol rojo 2 lb" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Cocina</span>
+          <strong>Frijol rojo 2 lb</strong>
+          <span class="price">L 70</span>
+          <div class="feat">Cosecha nacional.</div>
+          <div class="props">Clasificación: <b>Cocina</b></div>
+        </div>
+      </article>
+
+      <article class="card" data-name="Aceite 900 ml" data-cat="Cocina" data-price="68">
+        <div class="thumb"><img src="Img/Acei.WEBP" alt="Aceite 900 ml" onerror="this.style.display='none'; this.parentNode.classList.add('noimg');"></div>
+        <div class="pad">
+          <span class="badge">Cocina</span>
+          <strong>Aceite 900 ml</strong>
+          <span class="price">L 68</span>
+          <div class="feat">Vegetal.</div>
+          <div class="props">Clasificación: <b>Cocina</b></div>
+        </div>
+      </article>
+
+    </section>
+
+<!-- ===== CHURROS Y GALLETAS ===== -->
+<article class="card" data-name="Churros Tradicionales" data-cat="Churros y Galletas" data-price="35">
+  <div class="thumb">
+    <img src="Img/churro.jpg" alt="Churros Tradicionales"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Churros y Galletas</span>
+    <strong>Churros Tradicionales</strong>
+    <span class="price">L 35</span>
+    <div class="feat">Crujientes por fuera y suaves por dentro, espolvoreados con azúcar y canela.</div>
+    <div class="props">Porción: 6 unidades | Acompañamiento: Chocolate opcional</div>
+  </div>
+</article>
+
+<article class="card" data-name="Churros con Relleno" data-cat="Churros y Galletas" data-price="45">
+  <div class="thumb">
+    <img src="Img/RELLENO.jpg" alt="Churros con Relleno"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Churros y Galletas</span>
+    <strong>Churros con Relleno</strong>
+    <span class="price">L 45</span>
+    <div class="feat">Rellenos de manjar o chocolate, ideales para una merienda dulce.</div>
+    <div class="props">Porción: 4 unidades | Sabor: Manjar / Chocolate</div>
+  </div>
+</article>
+<article class="card" data-name="Mini Churros" data-cat="Churros y Galletas" data-price="30">
+  <div class="thumb">
+    <img src="Img/MINI.jpg" alt="Mini Churros"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Churros y Galletas</span>
+    <strong>Mini Churros</strong>
+    <span class="price">L 30</span>
+    <div class="feat">Perfectos para compartir, ligeros y dulces, recién horneados.</div>
+    <div class="props">Porción: 10 unidades | Tamaño: Mini</div>
+  </div>
+</article>
+
+<!-- GALLETAS -->
+<article class="card" data-name="Galletas de Chocolate" data-cat="Churros y Galletas" data-price="40">
+  <div class="thumb">
+    <img src="Img/CHOCO.jpg" alt="Galletas de Chocolate"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Churros y Galletas</span>
+    <strong>Galletas de Chocolate</strong>
+    <span class="price">L 40</span>
+    <div class="feat">Crujientes y llenas de chispas de chocolate.</div>
+    <div class="props">Paquete x10 | Elaboradas artesanalmente</div>
+  </div>
+</article>
+<article class="card" data-name="Galletas de Coco" data-cat="Churros y Galletas" data-price="38">
+  <div class="thumb">
+    <img src="Img/COCO.WEBP" alt="Galletas de Coco"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Churros y Galletas</span>
+    <strong>Galletas de Coco</strong>
+    <span class="price">L 38</span>
+    <div class="feat">Suaves, aromáticas y con trozos naturales de coco.</div>
+    <div class="props">Paquete x8 | Textura ligera</div>
+  </div>
+</article>
+
+<article class="card" data-name="Galletas de Mantequilla" data-cat="Churros y Galletas" data-price="42">
+  <div class="thumb">
+    <img src="Img/MANTE.jpg" alt="Galletas de Mantequilla"
+         onerror="this.style.display='none'; this.parentNode.classList.add('noimg');">
+  </div>
+  <div class="pad">
+    <span class="badge">Churros y Galletas</span>
+    <strong>Galletas de Mantequilla</strong>
+    <span class="price">L 42</span>
+    <div class="feat">Clásicas, suaves y doradas, con sabor tradicional casero.</div>
+    <div class="props">Paquete x10 | Elaboración artesanal</div>
+  </div>
+</article>
+
+    <footer>
+<p><em>La Pulpería R/R nació como un pequeño emprendimiento familiar en el barrio El Centro de Goascorán, Valle, frente a la cancha de fútbol.
+Su fundadora, motivada por el deseo de ofrecer productos frescos y de calidad a precios justos, comenzó con un pequeño local que con el tiempo se convirtió en un punto de encuentro para los vecinos.
+Gracias al esfuerzo y la confianza de la comunidad, la pulpería ha crecido, incorporando más variedad de productos y servicios, sin perder su esencia de atención cercana y trato amable.</em></p>
+      <p><em>Pequeños emprendedores</em> <strong>Gratitud</strong> — Servimos con agradecimiento a nuestra comunidad.</p>
+      <p><em>Creado por Altagracia Nicolle Pineda Contreras y Baxy Lisbeth Maldonado.</em></p>
+    </footer>
+  </main>
+</div>
+
+<!-- ====== LÓGICA: buscar, filtrar, ordenar (opera sobre tarjetas ya visibles) ====== -->
+<script>
+  const q = document.getElementById('q');
+  const sortSel = document.getElementById('sort');
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const catButtons = [...document.querySelectorAll('.cat')];
+  const count = document.getElementById('count');
+  const filterLabel = document.getElementById('filterLabel');
+  let state = { q:'', cat:'Todos', sort:'pop' };
+
+  function passes(card){
+    const name = card.dataset.name.toLowerCase();
+    const cat  = card.dataset.cat.toLowerCase();
+    const txt  = name + ' ' + cat + ' ' + card.querySelector('.feat').textContent.toLowerCase();
+    const byCat = (state.cat==='Todos' || card.dataset.cat===state.cat);
+    const byQ   = txt.includes(state.q);
+    return byCat && byQ;
+  }
+
+  function render(){
+    // filter
+    cards.forEach(c => c.style.display = passes(c) ? '' : 'none');
+
+    // sort (only among visible)
+    const grid = document.getElementById('grid');
+    const visibles = cards.filter(c => c.style.display !== 'none');
+    if(state.sort==='price-asc')  visibles.sort((a,b)=>(+a.dataset.price)-(+b.dataset.price));
+    if(state.sort==='price-desc') visibles.sort((a,b)=>(+b.dataset.price)-(+a.dataset.price));
+    if(state.sort==='name-asc')   visibles.sort((a,b)=>a.dataset.name.localeCompare(b.dataset.name));
+    visibles.forEach(v => grid.appendChild(v)); // reordenar
+
+    count.textContent = visibles.length;
+    filterLabel.textContent = state.cat;
+  }
+
+  q.addEventListener('input', e => { state.q = e.target.value.trim().toLowerCase(); render(); });
+  sortSel.addEventListener('change', e => { state.sort = e.target.value; render(); });
+  catButtons.forEach(btn => btn.addEventListener('click', e => {
+    catButtons.forEach(b=>b.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    state.cat = e.currentTarget.dataset.cat;
+    render();
+  }));
+
+  // Al cargar, si la imagen no existe, mostrar placeholder
+  document.querySelectorAll('.thumb img').forEach(img => {
+    img.addEventListener('error', ()=>{
+      img.style.display='none'; img.parentNode.classList.add('noimg');
+    });
+  });
+
+  render();
+</script>
+</body>
+</html>
